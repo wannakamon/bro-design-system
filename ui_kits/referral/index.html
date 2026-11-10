@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<!-- @dsCard group="Referral" viewport="1480x900" name="Referral & Rewards" subtitle="Interactive click-through — copy link, share, stamp milestones" -->
+<title>bro.game — ชวนเพื่อน (Referral)</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>html,body{margin:0;background:rgb(18,19,22)}
+*{box-sizing:border-box}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.hamburger{display:none}
+.sidebar{transition:left .25s ease}
+@media (max-width:860px){
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .hamburger{display:flex!important}
+  .sidebar{position:fixed;top:0;left:-240px;height:100vh;z-index:60}
+  .sidebar.open{left:0}
+  .sidebar-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:55}
+  .sidebar-scrim.open{display:block}
+  .main-pane{padding:16px!important;padding-bottom:280px!important}
+  .hero{flex-direction:column;align-items:flex-start!important}
+  .hero-art{width:100%!important;height:120px!important}
+  .layout-tabs{overflow-x:auto}
+  .reward-slider{padding:20px 14px!important}
+  .roadmap{padding-bottom:8px}
+  .level-card{padding:18px!important}
+  .reward-list{max-height:240px!important}
+  .gyl-mobile-fix{position:fixed!important;left:0;right:0;bottom:0;z-index:50;border-radius:16px 16px 0 0!important;box-shadow:0 -8px 24px rgba(0,0,0,0.4);max-height:45vh;overflow-y:auto}
+}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0a0a0a"/><circle cx="50" cy="50" r="28" fill="none" stroke="#76ba00" stroke-width="8"/><path d="M38 50l8 8 16-16" stroke="#a3ff47" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></template>
+<div id="root"></div>
+<script type="text/babel" data-presets="react" src="./ReferralShared.jsx"></script>
+<script type="text/babel" data-presets="react" src="./ReferralLayouts.jsx"></script>
+<script type="text/babel" data-presets="react" src="./ReferralApp.jsx"></script>
+</body>
+</html>

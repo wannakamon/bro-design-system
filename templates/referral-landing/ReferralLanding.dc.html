@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Referral Landing Page" description="Public /referral marketing page: CTA share, stamp rewards preview, dashboard preview, tutorial video, terms" -->
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<script src="./ds-base.js"></script>
+</helmet>
+<div data-screen-label="referral-landing" style="background:rgb(10,10,10);min-height:100vh;font-family:'IBM Plex Sans Thai',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:rgb(255,255,255)">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 40px;max-width:1200px;margin:0 auto">
+    <img src="../../assets/logo-white.png" alt="GeForce NOW by bro." style="height:36px;width:auto">
+    <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Button" label="เริ่มเล่น GeForce NOW" color="primary" style2="fill" size="md" hint-size="220px,46px"></x-import>
+  </header>
+
+  <section style="max-width:1200px;margin:0 auto;padding:8px 40px 40px">
+    <div style="border-radius:24px;border:1px solid rgba(255,255,255,0.31);padding:40px 44px;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:720px">
+        <h1 style="margin:0;font-size:32px;line-height:1.25;font-weight:700;text-wrap:pretty">ชวนเพื่อนเล่น GFN รับรางวัลไปด้วยกัน!</h1>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(255,255,255,0.75);text-wrap:pretty">เพียงชวนเพื่อนสมัครด้วยลิงก์ชวนเพื่อนของคุณ รับทันทีสแตมป์สะสมแต้มเพื่อรับของรางวัลอีกมากมาย</p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:4px;padding:16px 28px;border-radius:12px;background:rgba(118,186,0,0.1);border:1px solid rgba(118,186,0,0.4)">
+          <span style="font-size:12px;letter-spacing:0.04em;color:rgba(255,255,255,0.6)">รหัสชวนเพื่อนของคุณ</span>
+          <span style="font-size:28px;font-weight:700;color:rgb(163,255,71);letter-spacing:0.02em">{{code}}</span>
+        </div>
+        <div onClick="{{onCopyLink}}">
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Button" label="{{shareLabel}}" color="primary" style2="fill" size="lg" hint-size="260px,56px"></x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:0 40px 40px">
+    <div style="border-radius:6px;box-shadow:0 0 0 1px rgba(255,255,255,0.31);padding:28px 32px;display:flex;gap:40px;flex-wrap:wrap">
+      <div style="flex:1 1 380px;display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:20px;font-weight:700">STAMP MILESTONE</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="stamp" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="stamp" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="stamp" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="stamp" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="stamp" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="lock" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="lock" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+          <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Stamp" state="lock" hint-size="52px,52px" style="width:52px;height:52px"></x-import>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;display:flex;flex-direction:column;gap:16px">
+        <div>
+          <div style="font-size:20px;font-weight:700">รับรางวัล</div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.65);margin-top:4px">ยิ่งชวนเยอะ ยิ่งเข้าใกล้ของรางวัลมากขึ้น</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:44px;text-align:center;font-weight:700;font-size:16px;color:rgb(118,186,0)">20<div style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.6)">ดวง</div></div>
+            <div style="flex:1;padding:10px 16px;border-radius:8px;background:rgba(255,255,255,0.05);font-size:14px">รับ 40 ชั่วโมง เล่นฟรี!</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:44px;text-align:center;font-weight:700;font-size:16px;color:rgb(118,186,0)">10<div style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.6)">ดวง</div></div>
+            <div style="flex:1;padding:10px 16px;border-radius:8px;background:rgba(255,255,255,0.05);font-size:14px">รับ 40 ชั่วโมง เล่นฟรี!</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:44px;text-align:center;font-weight:700;font-size:16px;color:rgb(118,186,0)">5<div style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.6)">ดวง</div></div>
+            <div style="flex:1;padding:10px 16px;border-radius:8px;background:rgba(255,255,255,0.05);font-size:14px">รับ 40 ชั่วโมง เล่นฟรี!</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:44px;text-align:center;font-weight:700;font-size:16px;color:rgb(118,186,0)">2<div style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.6)">ดวง</div></div>
+            <div style="flex:1;padding:10px 16px;border-radius:8px;background:rgba(118,186,0,0.12);font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <span>รับ 5 ชั่วโมง เล่นฟรี!</span>
+              <x-import component-from-global-scope="BroGameDesignSystem_84b2ac.Button" label="รับเลย" color="primary" style2="fill" size="sm" hint-size="80px,32px"></x-import>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:0 40px 40px;display:flex;flex-direction:column;gap:16px">
+    <h2 style="margin:0;font-size:24px;font-weight:700">ตัวอย่างหน้าจอ Dashboard</h2>
+    <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.65);max-width:720px">หน้าตาของระบบชวนเพื่อนหลังเข้าสู่ระบบสมาชิก bro.game — ติดตามสแตมป์และรางวัลของคุณได้ตลอดเวลา</p>
+    <div style="border-radius:12px;border:1px solid rgba(255,255,255,0.31);overflow:hidden">
+      <img src="../../assets/reference/dashboard-referral-screenshot.png" alt="ตัวอย่างหน้าจอ Referral Dashboard" style="width:100%;display:block">
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:0 40px 40px;display:flex;flex-direction:column;gap:16px">
+    <h2 style="margin:0;font-size:24px;font-weight:700">วิดีโอสอนการใช้งาน</h2>
+    <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.65);max-width:720px">ดูวิธีชวนเพื่อนและรับรางวัลแบบทีละขั้นตอน</p>
+    <sc-if value="{{hasVideo}}" hint-placeholder-val="{{false}}">
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.31);aspect-ratio:16/9">
+        <iframe src="{{videoUrl}}" style="width:100%;height:100%;border:0" allowfullscreen="{{true}}"></iframe>
+      </div>
+    </sc-if>
+    <sc-if value="{{noVideo}}" hint-placeholder-val="{{true}}">
+      <div style="border-radius:12px;border:1px dashed rgba(255,255,255,0.31);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:repeating-linear-gradient(135deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 10px,transparent 10px,transparent 20px)">
+        <div style="width:0;height:0;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent rgba(255,255,255,0.4)"></div>
+        <span style="font-family:monospace;font-size:13px;color:rgba(255,255,255,0.5)">วางลิงก์วิดีโอสอนการใช้งาน (YouTube/Vimeo) ที่นี่ — ตั้งค่าได้ในแผง Tweaks</span>
+      </div>
+    </sc-if>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:0 40px 56px;display:flex;flex-direction:column;gap:16px">
+    <h2 style="margin:0;font-size:24px;font-weight:700">เงื่อนไขการสมัครแบบ Referral</h2>
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px;color:rgba(255,255,255,0.85)">
+      <li>ไม่มีการ Refund</li>
+      <li>ต้องเป็นสมาชิกใหม่เท่านั้นใช้ได้เฉพาะ<strong style="font-weight:700">แพ็กเกจรายเดือนเท่านั้น</strong></li>
+    </ul>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:8px">
+      <table style="flex:1 1 320px;border-collapse:collapse;font-size:14px">
+        <tr><th colspan="2" style="text-align:left;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-weight:700">Performance</th></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75)">1 Month</td><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;color:rgb(118,186,0);font-weight:600">+1</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75)">6 Months</td><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;color:rgb(118,186,0);font-weight:600">+5</td></tr>
+        <tr><td style="padding:10px 0;color:rgba(255,255,255,0.75)">12 Months</td><td style="padding:10px 0;text-align:right;color:rgb(118,186,0);font-weight:600">+10</td></tr>
+      </table>
+      <table style="flex:1 1 320px;border-collapse:collapse;font-size:14px">
+        <tr><th colspan="2" style="text-align:left;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.18);font-weight:700">Ultimate</th></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75)">1 Month</td><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;color:rgb(118,186,0);font-weight:600">+2</td></tr>
+        <tr><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75)">6 Months</td><td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;color:rgb(118,186,0);font-weight:600">+10</td></tr>
+        <tr><td style="padding:10px 0;color:rgba(255,255,255,0.75)">12 Months</td><td style="padding:10px 0;text-align:right;color:rgb(118,186,0);font-weight:600">+15</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer style="max-width:1200px;margin:0 auto;padding:24px 40px 40px;border-top:1px solid rgba(255,255,255,0.12);font-size:13px;color:rgba(255,255,255,0.5)">© bro.game — Powered by GeForce NOW</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2200},&quot;referralCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;BROFRIENDS&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;referralLink&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/sign-up/referral?ref=ABCDEFG123456&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;videoUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { codeCopied: false, linkCopied: false };
+  copyCode = () => {
+    const code = this.props.referralCode ?? "BROFRIENDS";
+    if (navigator.clipboard) navigator.clipboard.writeText(code).catch(() => {});
+    clearTimeout(this._ct);
+    this.setState({ codeCopied: true });
+    this._ct = setTimeout(() => this.setState({ codeCopied: false }), 2000);
+  };
+  copyLink = () => {
+    const link = this.props.referralLink ?? "/sign-up/referral?ref=ABCDEFG123456";
+    if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {});
+    clearTimeout(this._lt);
+    this.setState({ linkCopied: true });
+    this._lt = setTimeout(() => this.setState({ linkCopied: false }), 2000);
+  };
+  renderVals() {
+    const videoUrl = this.props.videoUrl ?? "";
+    return {
+      code: this.props.referralCode ?? "BROFRIENDS",
+      link: this.props.referralLink ?? "/sign-up/referral?ref=ABCDEFG123456",
+      codeState: this.state.codeCopied ? "copied" : "default",
+      linkState: this.state.linkCopied ? "copied" : "default",
+      onCopyCode: this.copyCode,
+      onCopyLink: this.copyLink,
+      shareLabel: this.state.linkCopied ? "คัดลอกลิงก์แล้ว!" : "แชร์ให้เพื่อน",
+      hasVideo: !!videoUrl,
+      noVideo: !videoUrl,
+      videoUrl: videoUrl,
+    };
+  }
+}
+</script>
+</body>
+</html>

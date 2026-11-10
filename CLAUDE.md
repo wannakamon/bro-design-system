@@ -1,0 +1,4 @@
+- Referral & Rewards page: primary source of truth is `ui_kits/referral/Referral-Standalone.html` (single-file bundle). Make future edits directly in this file, not the modular source files (index.html, ReferralApp.jsx, ReferralLayouts.jsx, ReferralShared.jsx).
+- Before delivering any change: check for bugs (mobile/responsive breakage, console errors, broken layout at narrow widths) and audit the result before calling it done.
+- **Audit ไฟล์ทุกครั้งว่ามี bug มั้ย**
+- **ตอบแค่ภาษาไทยเท่านั้น ไม่ว่าจะเริ่ม chat ใหม่**

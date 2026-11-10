@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>bro.game — Referred User Flow &amp; Edge Cases (Reference: Branch Diagram)</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:rgb(9,9,10);min-height:100vh;overflow-x:auto}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { Icon, Badge } = window.BroGameDesignSystem_84b2ac;
+const sans = {fontFamily:'var(--font-sans)'};
+const C = {
+  bg:'rgb(10,10,10)', card:'rgb(24,25,29)', border:'rgb(44,48,58)',
+  green:'rgb(118,186,0)', greenLight:'rgb(163,255,71)', text:'#fff', sub:'rgb(181,181,181)', mute:'rgb(139,146,158)'
+};
+const CAT = {
+  block:  {color:'rgb(224,62,62)',  label:'ทางตัน / ถูกปิดกั้นสิทธิ์'},
+  weird:  {color:'rgb(230,200,60)', label:'สถานะที่ไม่คาดคิด'},
+  input:  {color:'rgb(66,133,244)', label:'ข้อมูล / สิทธิ์ไม่ถูกต้อง'},
+  wait:   {color:'rgb(160,100,230)',label:'รอดำเนินการ / timeout'},
+};
+
+function StepBox({num, icon, title, desc, note}) {
+  return React.createElement('div',{style:{width:230,background:C.card,border:`1px solid ${C.border}`,borderRadius:14,padding:'18px 16px',display:'flex',flexDirection:'column',gap:10,flexShrink:0}},
+    React.createElement('div',{style:{display:'flex',alignItems:'center',gap:8}},
+      React.createElement('div',{style:{width:26,height:26,borderRadius:'50%',background:C.green,color:'#0a0a0a',display:'flex',alignItems:'center',justifyContent:'center',...sans,fontWeight:700,fontSize:13,flexShrink:0}}, num),
+      React.createElement(Icon,{name:icon,size:18,style:{color:C.greenLight}})
+    ),
+    React.createElement('span',{style:{...sans,fontWeight:700,fontSize:15,color:'#fff'}}, title),
+    React.createElement('span',{style:{...sans,fontSize:12.5,color:C.sub,lineHeight:1.5}}, desc),
+    note && React.createElement('div',{style:{display:'flex',alignItems:'flex-start',gap:6,marginTop:2,padding:'6px 8px',border:`1px solid ${C.border}`,borderRadius:6}},
+      React.createElement(Icon,{name:'IconInfoCircle',size:13,style:{color:C.mute,flexShrink:0,marginTop:1}}),
+      React.createElement('span',{style:{...sans,fontSize:11,color:C.mute,lineHeight:1.4}}, note)
+    )
+  );
+}
+function Arrow() {
+  return React.createElement('div',{style:{display:'flex',alignItems:'center',color:C.mute,fontSize:22,flexShrink:0,alignSelf:'center',marginTop:40}}, '→');
+}
+function Connector({height}) {
+  return React.createElement('div',{style:{width:2,height:height||28,background:C.border,margin:'0 auto'}});
+}
+function EdgeCard({cat, title, desc}) {
+  return React.createElement('div',{style:{width:230,background:C.card,border:`1px solid ${C.border}`,borderLeft:`3px solid ${cat.color}`,borderRadius:10,padding:'12px 14px',display:'flex',flexDirection:'column',gap:6}},
+    React.createElement('div',{style:{display:'flex',alignItems:'center',gap:6}},
+      React.createElement('div',{style:{width:8,height:8,borderRadius:'50%',background:cat.color,flexShrink:0}}),
+      React.createElement('span',{style:{...sans,fontWeight:700,fontSize:13,color:'#fff'}}, title)
+    ),
+    React.createElement('span',{style:{...sans,fontSize:12,color:C.sub,lineHeight:1.5}}, desc)
+  );
+}
+function BranchStack({items}) {
+  return React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:14,alignItems:'center'}},
+    items.map((it,i)=>React.createElement(React.Fragment,{key:i},
+      React.createElement(Connector,{height:16}),
+      React.createElement(EdgeCard,it)
+    ))
+  );
+}
+function Legend() {
+  return React.createElement('div',{style:{display:'flex',gap:20,flexWrap:'wrap',padding:'14px 18px',background:C.card,border:`1px solid ${C.border}`,borderRadius:10,width:'fit-content'}},
+    Object.values(CAT).map((c,i)=>React.createElement('div',{key:i,style:{display:'flex',alignItems:'center',gap:8}},
+      React.createElement('div',{style:{width:10,height:10,borderRadius:'50%',background:c.color}}),
+      React.createElement('span',{style:{...sans,fontSize:12,color:C.sub}}, c.label)
+    ))
+  );
+}
+
+function App() {
+  return React.createElement('div',{style:{padding:'48px 56px',display:'flex',flexDirection:'column',gap:28,minWidth:1500}},
+    React.createElement('div',null,
+      React.createElement('span',{style:{...sans,fontWeight:700,fontSize:24,color:'#fff'}}, 'Referred User — Acquisition Flow (Reference version)'),
+      React.createElement('div',{style:{...sans,fontSize:13,color:C.mute,marginTop:4}}, 'เส้นทางหลัก (บน) และ edge case ที่แตกออกจากแต่ละจุด (ล่าง) — สีของ edge case บอกประเภทปัญหา')
+    ),
+    React.createElement(Legend),
+
+    React.createElement('div',{style:{display:'flex',gap:0,alignItems:'flex-start'}},
+      React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:0}},
+        React.createElement(StepBox,{num:1,icon:'IconLink',title:'เปิดลิงก์แนะนำเพื่อน',desc:'ผู้ใช้ใหม่กดลิงก์/กรอกโค้ดจากเพื่อน เข้าสู่หน้าสมัครสมาชิก'}),
+        React.createElement(BranchStack,{items:[
+          {cat:CAT.block, title:'Campaign ended', desc:'แคมเปญปิดรับผู้แนะนำใหม่แล้ว — แสดงวันที่หมดเขตรับรางวัลที่ค้างอยู่'},
+          {cat:CAT.block, title:'Ineligible user', desc:'บัญชีเคยชำระเงิน/ใช้ Daypass มาก่อน — ลิงก์ใช้กับบัญชีนี้ไม่ได้'},
+          {cat:CAT.weird, title:'Used the conversion already', desc:'บัญชีนี้เคยได้รับรางวัลจากการแนะนำแล้ว 1 ครั้ง (ใช้ได้ครั้งเดียว/บัญชี)'},
+        ]})
+      ),
+      React.createElement(Arrow),
+      React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:0}},
+        React.createElement(StepBox,{num:2,icon:'IconCreditCard',title:'หน้าเช็คเอาท์',desc:'เลือกช่องทางชำระเงิน + ยืนยันโค้ดแนะนำเพื่อน (auto-fill จากลิงก์ หรือกรอกเอง)',note:'แสดง T&C "ไม่มีการ Refund" ก่อนกดชำระเงินเสมอ'}),
+        React.createElement(BranchStack,{items:[
+          {cat:CAT.input, title:'Payment method restricted', desc:'ปิดใช้งาน TrueMoney / Rabbit LINE Pay สำหรับผู้ใช้ที่มาจากลิงก์แนะนำ'},
+          {cat:CAT.input, title:'Manual referral code entry', desc:'กรณีเปิดลิงก์คนละอุปกรณ์ — กรอกโค้ดเอง ยืนยันครั้งแรกใช้ได้ครั้งเดียว'},
+        ]})
+      ),
+      React.createElement(Arrow),
+      React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:0}},
+        React.createElement(StepBox,{num:3,icon:'IconLoader2',title:'ยืนยันการชำระเงิน',desc:'ระบบตรวจสอบการชำระเงินและเปิดใช้งานแพ็กเกจ'}),
+        React.createElement(BranchStack,{items:[
+          {cat:CAT.wait, title:'Payment succeeded, entitlement pending', desc:'รับเงินแล้วแต่ยังเปิดสิทธิ์ไม่เสร็จ — แจ้งสถานะ "กำลังดำเนินการ" ไม่เกิน 15 นาที'},
+        ]})
+      ),
+      React.createElement(Arrow),
+      React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:0}},
+        React.createElement(StepBox,{num:4,icon:'IconGift',title:'ได้รับรางวัล',desc:'ผู้ถูกแนะนำได้รับ 10 ชม. เล่นเกมฟรี · ผู้แนะนำได้ Stamp เพิ่มอัตโนมัติ'}),
+        React.createElement(BranchStack,{items:[
+          {cat:CAT.weird, title:'Advocate maxed out', desc:'ฝั่งผู้แนะนำสะสม Stamp ครบ 24 ดวง/2 การ์ดแล้ว — ต้องรอแคมเปญรอบใหม่'},
+        ]})
+      )
+    )
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+</script>
+</body>
+</html>

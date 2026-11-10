@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Server Maintenance Pop-up</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+html,body{height:100%}
+body{margin:0;background:var(--surface-page);color:#fff;font-family:var(--font-sans);overflow:hidden}
+a{color:rgb(118,186,0)}a:hover{color:rgb(163,255,71)}
+.bg{position:fixed;inset:0;padding:24px;display:flex;flex-direction:column;gap:24px;filter:blur(6px);opacity:.5}
+.bg-nav{height:56px;border-radius:12px;background:var(--surface-header);border:1px solid var(--surface-border)}
+.bg-hero{flex:1;border-radius:16px;background:linear-gradient(180deg,rgb(30,33,40),rgb(18,19,22));border:1px solid var(--surface-border)}
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{width:100%;max-width:560px;border-radius:16px;background:rgba(43,43,43,.55);border:1.5px solid rgba(255,255,255,.31);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:32px 24px 24px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.icon-wrap{width:72px;height:72px;border-radius:50%;background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.35);display:flex;align-items:center;justify-content:center;color:#FFB020}
+.icon-wrap>*{width:36px!important;height:36px!important}.icon-wrap svg{width:36px;height:36px}
+.title{margin:0;font-weight:600;font-size:24px;line-height:32px;color:var(--color-text-primary,#fff)}
+.period{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid var(--surface-border)}
+.period-col{display:flex;flex-direction:column;gap:2px;min-width:0}
+.period-label{font-size:12px;line-height:16px;color:var(--color-text-secondary,#A1A1AA);text-transform:uppercase;letter-spacing:.04em}
+.period-date{font-family:var(--font-latin);font-size:15px;line-height:22px;font-weight:500;color:#fff}
+.period-time{font-family:var(--font-latin);font-size:20px;line-height:26px;font-weight:600;color:#FFB020}
+.period-sep{color:var(--color-text-secondary,#A1A1AA);font-size:18px}
+.tz{font-size:12px;color:var(--color-text-secondary,#A1A1AA);margin-top:-12px}
+.body{margin:0;font-size:16px;line-height:24px;color:var(--color-text-secondary,#A1A1AA);text-wrap:pretty}
+.actions{width:100%;display:flex}
+.actions>*{flex:1}
+.actions button,.actions [role=button]{width:100%!important}
+@media (max-width:480px){
+.modal{padding:24px 16px 16px;gap:16px}
+.title{font-size:20px;line-height:28px}
+.period{grid-template-columns:1fr;gap:8px;text-align:center}
+.period-sep{display:none}
+.body{font-size:14px;line-height:22px}
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="bg-nav"></div><div class="bg-hero"></div></div>
+<div class="backdrop">
+<div class="modal" role="alertdialog" aria-labelledby="mt-title" aria-describedby="mt-body">
+<div class="icon-wrap" id="icon"></div>
+<h1 class="title" id="mt-title">Server Maintenance</h1>
+<div class="period">
+<div class="period-col"><span class="period-label">Start</span><span class="period-date">18 November 2026</span><span class="period-time">00:00</span></div>
+<span class="period-sep">→</span>
+<div class="period-col"><span class="period-label">End</span><span class="period-date">19 November 2026</span><span class="period-time">10:00</span></div>
+</div>
+<div class="tz">Time zone: GMT+7 (Bangkok)</div>
+<p class="body" id="mt-body">We’re undergoing some maintenance.<br>Please try again after the maintenance ends.</p>
+<div class="actions" id="actions"></div>
+</div>
+</div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script>
+(function(){
+var NS=window.BroGameDesignSystem_84b2ac,el=document.getElementById('actions');
+if(!NS||!NS.Button){el.innerHTML='<button style="height:46px;border:0;border-radius:8px;background:#76BA00;color:#000;font:600 16px var(--font-sans)">OK</button>';return}
+ReactDOM.createRoot(el).render(React.createElement(NS.Button,{label:'OK',color:'primary',style2:'fill',size:'lg',showIcon:false,icon:null,style:{width:'100%',height:46}}));
+if(NS.AlertAlert02)ReactDOM.createRoot(document.getElementById('icon')).render(React.createElement(NS.AlertAlert02,{style:{width:36,height:36}}));
+})();
+</script>
+</body>
+</html>
