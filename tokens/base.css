@@ -1,16 +1,16 @@
 :root{
-  --font-sans: "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-latin: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display-th: "Loma", var(--font-sans);
-  --surface-page: rgb(18,19,22);
-  --surface-header: rgb(13,14,17);
-  --surface-border: rgb(44,48,58);
+  --font-sans: "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* @kind font */
+  --font-latin: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* @kind font */
+  --font-display-th: "Loma", var(--font-sans); /* @kind font */
+  --surface-page: rgb(18,19,22); /* @kind color */
+  --surface-header: rgb(13,14,17); /* @kind color */
+  --surface-border: rgb(44,48,58); /* @kind color */
 }
 :root{
---radix-lime-1:#000000;--radix-lime-2:#0F130A;--radix-lime-3:#1B2611;--radix-lime-4:#24370D;--radix-lime-5:#2E4612;--radix-lime-6:#385616;--radix-lime-7:#436618;--radix-lime-8:#4E7818;--radix-lime-9:#76BA00;--radix-lime-10:#6BAE00;--radix-lime-11:#8BCF36;--radix-lime-12:#C9F0A7;
---radix-green-1:#000000;--radix-green-2:#0B140C;--radix-green-3:#112915;--radix-green-4:#0F3A19;--radix-green-5:#154921;--radix-green-6:#1C5929;--radix-green-7:#216A32;--radix-green-8:#257E3B;--radix-green-9:#00C950;--radix-green-10:#17BB4D;--radix-green-11:#30DA61;--radix-green-12:#AEF5B7;
---tw-lime-50:#f5f7f1;--tw-lime-100:#edf3e1;--tw-lime-200:#dceebd;--tw-lime-300:#c5ed82;--tw-lime-400:#b1f43d;--tw-lime-500:#76BA00;--tw-lime-600:#81cc00;--tw-lime-700:#609503;--tw-lime-800:#456a05;--tw-lime-900:#2e4605;--tw-lime-950:#1e2d05;
---tw-green-50:#f1f7f4;--tw-green-100:#e1f3e8;--tw-green-200:#bdeed1;--tw-green-300:#82edac;--tw-green-400:#3df486;--tw-green-500:#00C950;--tw-green-600:#00b347;--tw-green-700:#00953d;--tw-green-800:#006a2d;--tw-green-900:#00461f;--tw-green-950:#002d15;
+--radix-lime-1:#000000; /* @kind color */--radix-lime-2:#0F130A;--radix-lime-3:#1B2611;--radix-lime-4:#24370D;--radix-lime-5:#2E4612;--radix-lime-6:#385616;--radix-lime-7:#436618;--radix-lime-8:#4E7818;--radix-lime-9:#76BA00;--radix-lime-10:#6BAE00;--radix-lime-11:#8BCF36;--radix-lime-12:#C9F0A7;
+--radix-green-1:#000000; /* @kind color */--radix-green-2:#0B140C;--radix-green-3:#112915;--radix-green-4:#0F3A19;--radix-green-5:#154921;--radix-green-6:#1C5929;--radix-green-7:#216A32;--radix-green-8:#257E3B;--radix-green-9:#00C950;--radix-green-10:#17BB4D;--radix-green-11:#30DA61;--radix-green-12:#AEF5B7;
+--tw-lime-50:#f5f7f1; /* @kind color */--tw-lime-100:#edf3e1;--tw-lime-200:#dceebd;--tw-lime-300:#c5ed82;--tw-lime-400:#b1f43d;--tw-lime-500:#76BA00;--tw-lime-600:#81cc00;--tw-lime-700:#609503;--tw-lime-800:#456a05;--tw-lime-900:#2e4605;--tw-lime-950:#1e2d05;
+--tw-green-50:#f1f7f4; /* @kind color */--tw-green-100:#e1f3e8;--tw-green-200:#bdeed1;--tw-green-300:#82edac;--tw-green-400:#3df486;--tw-green-500:#00C950;--tw-green-600:#00b347;--tw-green-700:#00953d;--tw-green-800:#006a2d;--tw-green-900:#00461f;--tw-green-950:#002d15;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);background:var(--surface-page);color:#fff}

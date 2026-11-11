@@ -2,3 +2,5 @@
 - Before delivering any change: check for bugs (mobile/responsive breakage, console errors, broken layout at narrow widths) and audit the result before calling it done.
 - **Audit ไฟล์ทุกครั้งว่ามี bug มั้ย**
 - **ตอบแค่ภาษาไทยเท่านั้น ไม่ว่าจะเริ่ม chat ใหม่**
+- **Docs audit: ห้ามแก้ไฟล์ HTML ก่อนผู้ใช้คอนเฟิร์ม** — เสนอรายการที่จะแก้ (ค่าเดิม → ค่าใหม่) แล้วรอคอนเฟิร์มทุกครั้ง บางค่าผู้ใช้อาจต้องไปหาค่าสีก่อน หรือเลือกไม่ปรับ
+- คำเตือน `ChoiceboxCheckbox` / `ChoiceboxRadio` จาก design-system check เป็นการเพิ่มโดยตั้งใจ ไม่ต้องแก้

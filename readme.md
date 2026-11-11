@@ -74,3 +74,125 @@ Buttons, alerts, badges, inputs (main 10-state Input + Input2, the referral link
 ## Components
 
 AlertBanner, AlertAlert02, AlertCheckmarkCircle02, AlertInformationCircle, AlertOctagonAlert, Badge, Button, ChoiceboxCheckbox, ChoiceboxRadio (intentional additions — not in the Figma kit; built for bro.game's payment/package "Choicebox" selection pattern, see Intentional additions above), Icon (+ 26 individual icon components: Icon24ShoppingCart, IconAiGame, IconBlockGame, IconCheck, IconChevronDown, IconChevronLeft, IconChevronRight, IconDot, IconEye, IconEyeOff, IconGift, IconHistory, IconLoaderCircle, IconMonitorSmartphone, IconSecurityCheck, IconUserCircle, IconUsersFour, IconWallet01, IconX), Input, Modal, NavMenu, SiteMenuDashboard, SocialButton, Stamp, UserAccount, Input2 (referral link-copy field, Default/Copied states).
+
+
+## Component index
+
+Every built component (exported on the bundle namespace):
+
+- `Alert`
+- `AlertAlert02`
+- `AlertBanner`
+- `AlertCheckmarkCircle02`
+- `AlertInformationCircle`
+- `AlertOctagonAlert`
+- `AntDesign`
+- `Badge`
+- `BadgeCount`
+- `Button`
+- `Button2`
+- `ButtonGroup`
+- `CardHeadLegacy`
+- `CardLegacy`
+- `CaretDown`
+- `CaretUp2`
+- `Check`
+- `CheckboxInput`
+- `ChoiceboxCheckbox`
+- `ChoiceboxRadio`
+- `ClockCircle`
+- `Close`
+- `Component13`
+- `Component14`
+- `Component15`
+- `Component16`
+- `Component23`
+- `Component24`
+- `Component25`
+- `Component26`
+- `Component3`
+- `Component32`
+- `ComponentTimelineItemHead`
+- `ComponentsDropdownMenuItem`
+- `ComponentsInputAffix`
+- `ComponentsTab`
+- `ComponentsTabLegacy`
+- `ComponentsTableCellHeader`
+- `ComponentsTabsTop`
+- `Cursor`
+- `Divider`
+- `DropdownMenu`
+- `Edit`
+- `Filter`
+- `Hrs15`
+- `Hrs30`
+- `Icon24ShoppingCart`
+- `IconAiGame`
+- `IconBlockGame`
+- `IconCheck`
+- `IconChevronDown`
+- `IconChevronLeft`
+- `IconChevronRight`
+- `IconDot`
+- `IconEye`
+- `IconEyeOff`
+- `IconGift`
+- `IconHistory`
+- `IconLoaderCircle`
+- `IconMonitorSmartphone`
+- `IconSecurityCheck`
+- `IconUserCircle`
+- `IconUsersFour`
+- `IconWallet01`
+- `IconWrapper`
+- `IconX`
+- `Image`
+- `InfoCircle`
+- `Input`
+- `Input2`
+- `Input3`
+- `InputAddonCursor`
+- `InputAddonIcon`
+- `InputAddonLabel`
+- `Internet`
+- `LayoutBlocksBase`
+- `LayoutBlocksHorizontal3`
+- `LayoutBlocksVertical41`
+- `Locale`
+- `LocaleChange`
+- `MenuDashboardMobile`
+- `MenuIconMore`
+- `Modal`
+- `Modal2`
+- `NavMenu`
+- `ProgressBarType4Show`
+- `Right`
+- `Scrollbar`
+- `Select`
+- `SelectionItem`
+- `Setting`
+- `SiteMenuDashboard`
+- `SocialButton`
+- `Sorter`
+- `Stamp`
+- `StampCard`
+- `StampCard3`
+- `StampStamped`
+- `Stampt`
+- `Steam`
+- `TabsTopLegacy`
+- `Tag`
+- `TextText`
+- `Textarea`
+- `Timeline`
+- `TimelineItemAlternate`
+- `TimelineItemLeft`
+- `TimelineItemRight`
+- `User`
+- `UserAccount`
+- `VerticalFormItemTextarea`
+- `Xbox`
+
+### Suffix-numbered components (intentional)
+
+The Figma kit contains several separate component sets that share the auto-generated names "Component 1", "Component 2", "Component 3", "Stamp card", "modal" and "Input". Each set was built as its own component with a numeric suffix so the names stay unique: `Component13`, `Component14`, `Component15`, `Component16` (Component 1 sets), `Component23`, `Component24`, `Component25`, `Component26` (Component 2 sets), `Component3`, `Component32` (Component 3 sets), `StampCard3`, `Modal2`, `Input3`. Helper parts extracted alongside them (`InputAddonLabel`, `InputAddonIcon`, `StampStamped`, `TimelineItemLeft`, `TimelineItemRight`, `LayoutBlocks*`) are sub-components of kit families. `ChoiceboxCheckbox` / `ChoiceboxRadio` are intentional hand-authored additions.

@@ -5,49 +5,53 @@ function Toast({message}) {
   return React.createElement('div', {style:{position:'fixed',bottom:24,right:24,background:'rgb(24,25,29)',border:'1px solid rgb(163,255,71)',borderRadius:8,padding:'12px 20px',color:'#fff',fontFamily:'var(--font-sans)',fontSize:14,fontWeight:500,boxShadow:'0 0 20px rgba(163,255,71,0.25)',zIndex:1000}}, message);
 }
 
-function Header({onProfile}) {
-  const [lang, setLang] = React.useState('EN');
-  return React.createElement('div', {style:{height:64,background:'rgb(13,14,17)',borderBottom:'1px solid rgb(44,48,58)',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 24px',flexShrink:0}},
-    React.createElement('span', {style:{fontFamily:'var(--font-latin)',fontWeight:600,fontSize:20,letterSpacing:'0.5px',color:'#fff'}}, 'membership bro.game'),
-    React.createElement('div', {style:{display:'flex',alignItems:'center',gap:16}},
-      React.createElement('div', {style:{display:'flex',background:'rgb(24,25,29)',border:'1px solid rgb(44,48,58)',borderRadius:6,padding:2,cursor:'pointer'},onClick:()=>setLang(l=>l==='EN'?'TH':'EN')},
-        ['EN','TH'].map(l => React.createElement('span', {key:l, style:{fontFamily:'var(--font-latin)',fontWeight:600,fontSize:13,padding:'6px 10px',borderRadius:4,color: lang===l ? '#000' : 'rgb(181,181,181)', background: lang===l ? 'rgb(163,255,71)' : 'transparent'}}, l))
-      ),
-      React.createElement('div', {style:{background:'rgb(163,255,71)',borderRadius:6,padding:'8px 16px',boxShadow:'0 0 15px rgba(163,255,71,0.3)',fontFamily:'var(--font-latin)',fontWeight:600,fontSize:16,color:'#000'}}, 'Download App'),
-      React.createElement('div', {onClick:onProfile, style:{width:36,height:36,borderRadius:'50%',background:'rgb(163,255,71)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'var(--font-sans)',fontWeight:700,fontSize:14,color:'#000',cursor:'pointer',flexShrink:0}}, 'P')
-    )
+function TopBar() {
+  const [open, setOpen] = React.useState(false);
+  const [lang, setLang] = React.useState('ไทย');
+  return React.createElement('div', {style:{height:46,display:'flex',justifyContent:'flex-end',alignItems:'center',gap:10,flexShrink:0}},
+    React.createElement('div', {style:{position:'relative'}},
+      React.createElement('div', {onClick:()=>setOpen(o=>!o), style:{height:46,boxSizing:'border-box',display:'flex',alignItems:'center',gap:8,padding:'0 14px',border:'1px solid rgba(255,255,255,0.31)',borderRadius:6,color:'#fff',cursor:'pointer',fontFamily:'var(--font-sans)',fontSize:16,fontWeight:500}},
+        React.createElement(Icon,{name:'IconLanguage',size:20}), lang, React.createElement(Icon,{name:'IconChevronDown',size:16})),
+      open && React.createElement('div', {style:{position:'absolute',top:52,left:0,right:0,background:'rgb(24,25,29)',border:'1px solid rgba(255,255,255,0.31)',borderRadius:6,overflow:'hidden',zIndex:10}},
+        ['ไทย','English'].map(l=>React.createElement('div',{key:l,onClick:()=>{setLang(l);setOpen(false);},style:{padding:'10px 14px',color:'#fff',cursor:'pointer',fontSize:14}},l)))
+    ),
+    React.createElement(Button, {color:'primary',style2:'fill',size:'lg',label:'เริ่มเล่น GeForce NOW'})
   );
 }
 
 const NAV = [
-  {key:'default', label:'ภาพรวม', section:'main'},
-  {key:'plan', label:'แพ็กเกจ', section:'main'},
-  {key:'payment', label:'การชำระเงิน', section:'main'},
-  {key:'redeem code', label:'แลกโค้ด', section:'main'},
-  {key:'friend', label:'ชวนเพื่อน', section:'main'},
-  {key:'profile', label:'โปรไฟล์', section:'settings'},
-  {key:'history', label:'ประวัติการเล่น', section:'settings'},
-  {key:'device', label:'อุปกรณ์', section:'settings'},
+  {key:'default', label:'ภาพรวม', icon:'IconAiGame', section:'main'},
+  {key:'plan', label:'แพ็กเกจ', icon:'IconBlockGame', section:'main', sub:[{key:'main plan', label:'แพ็กเกจหลัก'}]},
+  {key:'payment', label:'การชำระเงิน', icon:'IconWallet01', section:'main'},
+  {key:'redeem code', label:'แลกรางวัล หรือ โค้ด', icon:'IconGift', section:'main'},
+  {key:'friend', label:'ชวนเพื่อน', icon:'IconUsersFour', section:'main'},
+  {key:'profile', label:'โปรไฟล์', icon:'IconUserCircle', section:'settings'},
+  {key:'history', label:'ประวัติการเล่น', icon:'IconHistory', section:'settings'},
 ];
 
 function Sidebar({active, onSelect}) {
-  const item = (n, sectionLabel) => React.createElement('div', {
-    key:n.key, onClick:()=>onSelect(n.key),
-    style:{display:'flex',alignItems:'center',height:52,padding:'0 12px',borderRadius:8,cursor:'pointer',
-      background: active===n.key ? 'rgba(118,186,0,0.15)' : 'transparent',
-      color: active===n.key ? 'rgb(163,255,71)' : 'rgb(181,181,181)',
-      fontFamily:'var(--font-sans)', fontWeight:500, fontSize:16}
-  }, n.label);
-  return React.createElement('div', {style:{width:228,background:'rgb(13,14,17)',borderRight:'1px solid rgb(44,48,58)',display:'flex',flexDirection:'column',gap:32,padding:20,flexShrink:0,overflowY:'auto',minHeight:0}},
-    React.createElement('img', {src:'../../assets/logo-white.png', style:{height:36,alignSelf:'flex-start'}}),
-    React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:8}},
-      React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontSize:14,color:'rgb(181,181,181)'}}, 'เมนูหลัก'),
-      ...NAV.filter(n=>n.section==='main').map(n=>item(n))
-    ),
-    React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:8}},
-      React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontSize:14,color:'rgb(181,181,181)'}}, 'ตั้งค่า'),
-      ...NAV.filter(n=>n.section==='settings').map(n=>item(n))
-    )
+  const [planOpen, setPlanOpen] = React.useState(true);
+  const row = (key, label, icon, opts={}) => {
+    const on = active===key;
+    return React.createElement('div', {key, style:{position:'relative',display:'flex',alignItems:'center'}},
+      on && React.createElement('div',{style:{position:'absolute',left:-12,width:4,height:24,borderRadius:2,background:'rgb(118,186,0)',boxShadow:'0 0 16px 4px rgba(118,186,0,0.45)'}}),
+      React.createElement('div', {onClick:opts.onClick||(()=>onSelect(key)), style:{flex:1,display:'flex',alignItems:'center',gap:10,height:46,padding:icon?'0 16px':'0 16px 0 26px',boxSizing:'border-box',borderRadius:8,cursor:'pointer',
+        background:on?'rgba(255,255,255,0.08)':'transparent', boxShadow:on?'inset 0 0 0 1px rgba(255,255,255,0.18)':'none',
+        color:'#fff', fontFamily:'var(--font-sans)', fontWeight:on?500:400, fontSize:16}},
+        icon && React.createElement(Icon,{name:icon,size:20}),
+        React.createElement('span',{style:{flex:1}},label),
+        opts.chevron && React.createElement('span',{style:{display:'flex',transform:planOpen?'rotate(180deg)':'none'}},React.createElement(Icon,{name:'IconChevronDown',size:16}))
+      ));
+  };
+  const items = sec => NAV.filter(n=>n.section===sec).flatMap(n => n.sub
+    ? [row(n.key,n.label,n.icon,{chevron:true,onClick:()=>setPlanOpen(o=>!o)}), ...(planOpen?n.sub.map(s=>row(s.key,s.label)):[])]
+    : [row(n.key,n.label,n.icon)]);
+  const head = t => React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontSize:14,color:'rgb(181,181,181)',marginBottom:4}}, t);
+  return React.createElement('div', {style:{width:274,boxSizing:'border-box',border:'1px solid rgba(255,255,255,0.31)',borderRadius:24,display:'flex',flexDirection:'column',gap:32,padding:20,flexShrink:0,overflowY:'auto',minHeight:0}},
+    React.createElement('img', {src:'../../assets/logo-white.png', alt:'GeForce NOW powered by bro', style:{width:200,alignSelf:'flex-start'}}),
+    React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:6}}, head('เมนูหลัก'), ...items('main')),
+    React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:6,flex:1}}, head('ตั้งค่า'), ...items('settings')),
+    React.createElement(UserAccount, {property1:'verified', text1:'JJ', text2:'JAN. JANJAN', text3:'wannakamon93@gmail.com', style:{alignSelf:'stretch',width:'auto'}})
   );
 }
 
@@ -56,22 +60,24 @@ function Card({children, style}) {
 }
 function H({children}) { return React.createElement('h2', {style:{fontFamily:'var(--font-sans)',fontWeight:700,fontSize:22,color:'#fff',margin:'0 0 16px'}}, children); }
 
-function Overview() {
-  return React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:20}},
-    React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontWeight:600,fontSize:24,color:'#fff'}}, 'สวัสดี Peter'),
-    React.createElement(AlertBanner, {alertStatus:'info', text1:'แพ็กเกจของคุณ', text2:'เล่น GeForce NOW ฟรี 24 ชั่วโมง — สิ้นสุด 26 ก.พ.2569 15:14:21'}),
-    React.createElement('div', {style:{display:'flex',gap:20}},
-      React.createElement(Card, {style:{flex:1}},
-        React.createElement(H, null, 'แพ็กเกจ Performance'),
-        React.createElement('span', {style:{fontFamily:'var(--font-sans)',color:'rgb(181,181,181)',fontSize:14}}, 'คงเหลือ 100 จาก 105 ชั่วโมง'),
-        React.createElement('div', {style:{marginTop:16}}, React.createElement(Button, {color:'primary',style2:'fill',size:'md',label:'เติมชั่วโมงเล่น'}))
-      ),
-      React.createElement(Card, {style:{flex:1}},
-        React.createElement(H, null, 'รอบบิลถัดไป'),
-        React.createElement('span', {style:{fontFamily:'var(--font-sans)',color:'rgb(181,181,181)',fontSize:14}}, 'เริ่มใช้งาน 15 เม.ย. 2569'),
-        React.createElement('div', {style:{display:'flex',gap:8,marginTop:16}}, React.createElement(Badge,{status:'success',label:'Active'}))
-      )
-    )
+function Overview({onBuy}) {
+  const used=0,total=0,pct=total?used/total*100:0;
+  return React.createElement('div', {style:{display:'flex',flexDirection:'column',gap:32}},
+    React.createElement('div', {style:{display:'flex',alignItems:'center',gap:10}},
+      React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontWeight:700,fontSize:30,color:'#fff'}}, 'สวัสดี JAN.'),
+      React.createElement('span', {style:{color:'var(--color-text-success)',display:'flex'}}, React.createElement(Icon,{name:'IconVerified',size:24}))),
+    React.createElement('div', {style:{border:'1px solid rgba(255,255,255,0.31)',borderRadius:12,padding:20,background:'linear-gradient(135deg, rgb(48,48,50) 0%, rgb(30,30,32) 60%, rgb(24,24,26) 100%)',display:'flex',flexDirection:'column',gap:16}},
+      React.createElement('div', {style:{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:16,flexWrap:'wrap'}},
+        React.createElement('div', {style:{display:'flex',alignItems:'center',gap:12,color:'#fff'}}, React.createElement(Icon,{name:'IconGameController',size:32}),
+          React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontWeight:700,fontSize:36}}, 'Ultimate')),
+        React.createElement('div', {style:{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:16}},
+          React.createElement('span', {style:{background:'rgb(118,186,0)',color:'#fff',borderRadius:4,padding:'4px 10px',fontSize:12,fontWeight:500}}, 'แพ็กเกจปัจจุบัน'),
+          React.createElement('span', {style:{fontFamily:'var(--font-sans)',fontWeight:600,fontSize:18,color:'rgb(209,213,219)'}}, 'รอบบิลถัดไป: 26 พฤศจิกายน 2026'))),
+      React.createElement('div', {style:{fontFamily:'var(--font-sans)',fontSize:20,marginTop:12}},
+        React.createElement('span',{style:{color:'#fff'}},'คงเหลือ '+used+' ชั่วโมง '), React.createElement('span',{style:{color:'rgb(140,140,140)'}},'จาก '+total+' ชั่วโมง')),
+      React.createElement('div', {style:{height:8,borderRadius:4,background:'rgba(255,255,255,0.12)',overflow:'hidden'}}, React.createElement('div',{style:{width:pct+'%',height:'100%',background:'rgb(118,186,0)'}})),
+      React.createElement('div', {style:{display:'flex',justifyContent:'flex-end',marginTop:24}},
+        React.createElement(Button, {color:'primary',style2:'fill',size:'lg',label:'ซื้อชั่วโมงเพิ่ม',style:{width:200},onClick:onBuy})))
   );
 }
 
@@ -178,29 +184,18 @@ function History() {
   );
 }
 
-function Device() {
-  return React.createElement(Card, null,
-    React.createElement(H, null, 'อุปกรณ์ที่เชื่อมต่อ'),
-    React.createElement('div', {style:{display:'flex',gap:16}},
-      ['Windows PC','iPhone 15'].map(d => React.createElement('div', {key:d, style:{display:'flex',alignItems:'center',gap:12,padding:'12px 16px',border:'1px solid rgb(44,48,58)',borderRadius:8,fontFamily:'var(--font-sans)',color:'#fff'}},
-        React.createElement('div', {style:{display:'flex',alignItems:'center',justifyContent:'center',width:32,height:32,flexShrink:0}}, React.createElement(Icon,{name:'IconMonitorSmartphone',size:20})), d
-      ))
-    )
-  );
-}
-
-const PANES = {default:Overview, plan:Plan, payment:Payment, 'redeem code':Redeem, friend:Friend, profile:Profile, history:History, device:Device};
+const PANES = {default:Overview, plan:Plan, 'main plan':Plan, payment:Payment, 'redeem code':Redeem, friend:Friend, profile:Profile, history:History};
 
 function App() {
   const [active, setActive] = React.useState('default');
   const [toast, setToast] = React.useState(null);
   const showToast = (msg) => { setToast(msg); clearTimeout(window.__toastTimer); window.__toastTimer = setTimeout(()=>setToast(null), 2500); };
   const Pane = PANES[active];
-  return React.createElement('div', {style:{display:'flex',flexDirection:'column',height:'100vh',fontFamily:'var(--font-sans)'}},
-    React.createElement(Header, {onProfile:()=>setActive('profile')}),
-    React.createElement('div', {style:{display:'flex',flex:1,overflow:'hidden'}},
-      React.createElement(Sidebar, {active, onSelect:setActive}),
-      React.createElement('div', {style:{flex:1,padding:32,overflow:'auto'}}, React.createElement(Pane, {showToast}))
+  return React.createElement('div', {style:{display:'flex',gap:30,height:'100vh',boxSizing:'border-box',padding:40,background:'rgb(10,10,10)',fontFamily:'var(--font-sans)'}},
+    React.createElement(Sidebar, {active, onSelect:setActive}),
+    React.createElement('div', {style:{flex:1,minWidth:0,display:'flex',flexDirection:'column',gap:16,overflow:'hidden'}},
+      React.createElement(TopBar),
+      React.createElement('div', {style:{flex:1,overflow:'auto',paddingTop:8}}, React.createElement(Pane, {showToast, onBuy:()=>setActive('plan')}))
     ),
     React.createElement(Toast, {message:toast})
   );
