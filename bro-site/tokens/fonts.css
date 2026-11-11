@@ -1,0 +1,2 @@
+/* Real webfonts used by the file: IBM Plex Sans Thai (primary UI face, Thai+Latin), Inter (marketing/dashboard headers), Loma (a few Thai display fallbacks). All three are Google Fonts — no local font files were attached, so we load them from the Google Fonts CDN at their exact family names rather than substituting. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Loma:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

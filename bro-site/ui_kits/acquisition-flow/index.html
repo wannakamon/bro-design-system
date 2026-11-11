@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>bro.game — Referred User Flow, Edge Cases &amp; Notifications</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:rgb(9,9,10);font-family:var(--font-sans);color:#fff;padding:40px 48px;min-width:1600px}
+.section{margin-bottom:56px}
+.sectionhead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.num{background:rgb(163,255,71);color:#0a0a0a;font-weight:800;font-size:14px;padding:4px 10px;border-radius:6px}
+.sectionhead h2{font-size:20px;font-weight:700}
+.sub{font-size:12.5px;color:rgb(139,146,158);margin:-10px 0 18px 2px}
+.card{background:rgb(24,25,29);border:1px solid rgb(44,48,58);border-radius:12px}
+.row{display:flex;align-items:flex-start}
+.arrow{color:rgb(139,146,158);font-size:20px;flex-shrink:0;align-self:center;padding:0 6px;margin-top:70px}
+.step{width:190px;padding:14px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.stepnum{width:20px;height:20px;border-radius:50%;background:rgb(118,186,0);color:#0a0a0a;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step .t{font-size:13px;font-weight:700}
+.step .d{font-size:11px;color:rgb(181,181,181);line-height:1.5}
+.thumb{height:96px;border-radius:8px;background:rgb(14,15,17);border:1px solid rgb(44,48,58);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700}
+.g{background:rgba(118,186,0,.15);color:rgb(163,255,71)}
+.mini-btn{background:rgb(118,186,0);color:#0a0a0a;font-size:10px;font-weight:700;border-radius:6px;padding:5px;text-align:center}
+.radio{display:flex;align-items:center;gap:6px;font-size:10px;color:rgb(181,181,181)}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid rgb(139,146,158)}
+.dot.on{border-color:rgb(118,186,0);background:rgb(118,186,0)}
+.footrow{display:flex;gap:0;margin-top:14px}
+.foot{flex:1;padding:14px 18px;font-size:11.5px;color:rgb(181,181,181);border-right:1px solid rgb(44,48,58);display:flex;gap:10px;align-items:flex-start}
+.foot:last-child{border-right:none}
+.foot b{color:#fff;font-size:12.5px;display:block;margin-bottom:6px}
+.foot li{margin-left:14px}
+.dmrow{display:flex;align-items:center;gap:14px;margin-bottom:0}
+.diamond{width:100px;height:100px;border:2px solid rgb(139,146,158);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.diamond span{transform:rotate(-45deg);font-size:10.5px;text-align:center;color:#fff;font-weight:600;padding:0 6px;line-height:1.3}
+.node{padding:10px 16px;border:1px solid rgb(44,48,58);border-radius:8px;font-size:12px;font-weight:700;background:rgb(24,25,29);white-space:nowrap;flex-shrink:0}
+.branch-label{font-size:10px;color:rgb(224,62,62);font-weight:700;text-align:center;margin:6px 0}
+.edgegrid{display:grid;grid-template-columns:repeat(9,1fr);gap:10px;margin-top:8px}
+.edgecard{border:1px solid rgb(224,62,62);border-radius:10px;padding:12px;font-size:10.5px;color:rgb(181,181,181);display:flex;flex-direction:column;gap:4px}
+.edgecard .t{color:#fff;font-weight:700;font-size:11.5px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:rgb(139,146,158);font-size:11px;font-weight:600;padding:10px 14px;border-bottom:1px solid rgb(44,48,58)}
+td{padding:12px 14px;border-bottom:1px solid rgb(44,48,58);color:#fff;vertical-align:top}
+td.mute{color:rgb(139,146,158);font-size:11.5px}
+.refnote{font-size:12px;color:rgb(139,146,158);margin:-30px 0 24px 2px}
+.refnote a{color:rgb(163,255,71)}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.checkgroup{padding:18px 20px;border-right:1px solid rgb(44,48,58)}
+.checkgroup:nth-child(2n){border-right:none}
+.checkgroup h3{font-size:13px;color:rgb(163,255,71);margin-bottom:10px}
+.checkitem{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:13px;cursor:pointer}
+.checkitem input{width:16px;height:16px;margin-top:2px;accent-color:rgb(118,186,0);cursor:pointer;flex-shrink:0}
+.checkitem span.done{color:rgb(139,146,158);text-decoration:line-through}
+</style>
+</head>
+<body>
+<div class="refnote">ดูเวอร์ชันแผนภาพแบบแตกแขนง (branch diagram) ก่อนหน้าได้ที่ <a href="flow-diagram-reference.html">flow-diagram-reference.html</a></div>
+
+<div class="section">
+  <div class="sectionhead"><span class="num">01</span><h2>Referred User — Signup → Payment</h2></div>
+  <div class="card" style="padding:20px">
+    <div class="row" style="gap:0">
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">1</span><span class="t">คลิก Referral Link</span></div>
+        <div class="d">เพื่อคลิกลิงก์ที่ได้รับ</div>
+        <div class="thumb"><span class="pill g">GeForce NOW</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">2</span><span class="t">Signup</span></div>
+        <div class="d">สมัครสมาชิก</div>
+        <div class="thumb" style="flex-direction:column;gap:5px;padding:10px">
+          <div style="width:100%;height:14px;border:1px solid rgb(44,48,58);border-radius:4px"></div>
+          <div style="width:100%;height:14px;border:1px solid rgb(44,48,58);border-radius:4px"></div>
+          <div class="mini-btn" style="width:100%">สมัครสมาชิก</div>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">3</span><span class="t">Attribution (Auto)</span></div>
+        <div class="d">ระบบผูก Referral อัตโนมัติ</div>
+        <div class="thumb"><span class="pill g">✓ บันทึกข้อมูลแล้ว</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">4</span><span class="t">เลือกแพ็กเกจ</span></div>
+        <div class="d">เลือกแพ็กเกจที่ต้องการ</div>
+        <div class="thumb" style="flex-direction:column;gap:6px;align-items:flex-start;padding:10px">
+          <div class="radio"><span class="dot on"></span>Performance</div>
+          <div class="radio"><span class="dot"></span>Ultimate</div>
+          <div class="radio"><span class="dot"></span>Day Pass</div>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step" style="width:210px">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">5</span><span class="t">Checkout</span></div>
+        <div class="d">กรอกข้อมูลและดำเนินการชำระเงิน</div>
+        <div class="thumb" style="flex-direction:column;gap:5px;align-items:flex-start;padding:10px">
+          <div style="font-size:9px;color:rgb(139,146,158)">ยอดชำระ <b style="color:#fff">฿599</b></div>
+          <div class="radio"><span class="dot on"></span>บัตรเครดิต/เดบิต</div>
+          <div class="radio" style="opacity:.4"><span class="dot"></span>TrueMoney (ปิด)</div>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">6</span><span class="t">Payment Success</span></div>
+        <div class="d">ชำระเงินสำเร็จ</div>
+        <div class="thumb"><span class="pill g">✓ ชำระเงินสำเร็จ</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div style="display:flex;align-items:center;gap:6px"><span class="stepnum">7</span><span class="t">รับรางวัล 10 ชั่วโมง</span></div>
+        <div class="d">ระบบมอบ 10 ชั่วโมงให้ทันที</div>
+        <div class="thumb" style="flex-direction:column;gap:4px">
+          <span style="color:rgb(163,255,71);font-weight:800;font-size:14px">+10 ชั่วโมง</span>
+          <div class="mini-btn" style="width:100%">ไปยัง Dashboard</div>
+        </div>
+      </div>
+    </div>
+    <div class="footrow" style="border-top:1px solid rgb(44,48,58);margin-top:16px">
+      <div class="foot"><b>🎫 Referral Code (Manual)</b>หากลิงก์ใช้งานไม่ได้ หรือเปิดคนละอุปกรณ์ — กรอกโค้ดที่หน้า Checkout ยืนยันได้ครั้งแรกครั้งเดียว</div>
+      <div class="foot"><b>เงื่อนไขการรับรางวัล</b>
+        <div>• ต้องเป็นสมาชิกใหม่เท่านั้น</div>
+        <div>• ต้องสมัครผ่าน Referral Link หรือกรอกโค้ด</div>
+        <div>• ต้องซื้อแพ็กเกจและชำระเงินสำเร็จ</div>
+        <div>• ไม่สามารถคืนเงินได้</div>
+      </div>
+      <div class="foot"><b>⚠️ หมายเหตุ</b>ผู้ที่สมัครผ่าน Referral จะถูกติด Flag เพื่อให้ทีมงานสามารถตรวจสอบได้</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sectionhead"><span class="num">02</span><h2>Edge Cases — Decision Map</h2></div>
+  <div class="card" style="padding:24px">
+    <div class="dmrow">
+      <div class="node">🧍 เริ่มต้น<br><span style="font-weight:400;color:rgb(139,146,158);font-size:10px">คลิก Referral Link หรือกรอกโค้ด</span></div>
+      <div class="arrow" style="margin-top:0">→</div>
+      <div class="diamond"><span>ผู้ใช้มีสิทธิ์รับรางวัล? (Eligibility)</span></div>
+      <div class="arrow" style="margin-top:0">ใช่ →</div>
+      <div class="node">ดำเนินการต่อ<br><span style="font-weight:400;color:rgb(139,146,158);font-size:10px">Signup / Checkout</span></div>
+      <div class="arrow" style="margin-top:0">→</div>
+      <div class="diamond"><span>ชำระเงินสำเร็จ? (Payment)</span></div>
+      <div class="arrow" style="margin-top:0">ใช่ →</div>
+      <div class="node" style="background:rgba(118,186,0,.12);border-color:rgb(118,186,0)">🎁 มอบ 10 ชั่วโมง<br><span style="font-weight:400;color:rgb(181,181,181);font-size:10px">และผูก Referral</span></div>
+    </div>
+    <div class="branch-label" style="margin-top:14px">↓ ไม่ (Eligibility)　　　　　　　　　　　　　　　　　　　　　　　↓ ไม่ (Payment)</div>
+    <div class="edgegrid">
+      <div class="edgecard"><span class="t">👤 เคยสมัคร/ชำระเงินแล้ว</span>(Already Paid)แสดงข้อความว่าคุณไม่สามารถรับรางวัล Referral ได้</div>
+      <div class="edgecard"><span class="t">🎫 ใช้ Day Pass</span>(Day Pass Excluded)แสดงข้อความว่าแพ็ก Day Pass ไม่ร่วมรายการ</div>
+      <div class="edgecard"><span class="t">🔁 เคยใช้ Referral ไปแล้ว</span>(One Conversion Used)แสดงข้อความว่าคุณเคยใช้สิทธิ์ Referral ไปแล้ว</div>
+      <div class="edgecard"><span class="t">✕ ชำระเงินไม่สำเร็จ</span>(Payment Failed)แสดงข้อความแนะนำและให้ลองใหม่อีกครั้ง</div>
+      <div class="edgecard"><span class="t">⏳ ชำระเงินสำเร็จแต่สิทธิ์ยังไม่พร้อม</span>(Entitlement Pending)แสดงข้อความว่ากำลังดำเนินการ กรุณารอสักครู่</div>
+      <div class="edgecard"><span class="t">📣 แคมเปญนี้สิ้นสุดแล้ว</span>(Campaign Ended)แสดงข้อความว่าแคมเปญนี้สิ้นสุดแล้ว ไม่สามารถรับรางวัลได้</div>
+      <div class="edgecard"><span class="t">⭐ เกินจำนวน Stamp สูงสุด</span>(Max Stamp Reached)แสดงข้อความว่าคุณสะสมแสตมป์ครบแล้ว ไม่สามารถรับเพิ่มได้</div>
+      <div class="edgecard"><span class="t">⚠️ บัญชีถูกระงับ</span>(Suspended / Flagged)แสดงข้อความว่าบัญชีถูกทำเครื่องหมายไว้ กรุณาติดต่อ CS</div>
+      <div class="edgecard"><span class="t">🛠️ ระบบปิดปรับปรุง</span>(Maintenance)แสดงข้อความว่าระบบปิดปรับปรุง กรุณาลองใหม่ภายหลัง</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sectionhead"><span class="num">03</span><h2>Notification — Trigger → Message → User Action</h2></div>
+  <div class="card" style="padding:0">
+    <table>
+      <tr><th style="width:36px">#</th><th style="width:230px">Trigger (เมื่อไหร่)</th><th style="width:340px">Message (ข้อความ)</th><th style="width:120px">ช่องทาง</th><th style="width:230px">User Action</th><th>หมายเหตุ</th></tr>
+      <tr>
+        <td>1</td>
+        <td><b>แคมเปญเริ่มต้น</b><div class="mute">(Campaign Announcement)</div></td>
+        <td>🎮 ชวนเพื่อนเล่น GeForce NOW รับรางวัลไปด้วยกัน!</td>
+        <td>อีเมล · แจ้งเตือน · In-app</td>
+        <td>คลิกดูรายละเอียด / เข้า Dashboard เพื่อชวนเพื่อน</td>
+        <td class="mute">ส่งให้ผู้ใช้ที่เข้าเงื่อนไข (ทั้งแบบยืนยันอีเมลแล้วและยังไม่ยืนยัน)</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><b>เพื่อนชำระเงินสำเร็จ</b><div class="mute">(Friend Payment Success)</div></td>
+        <td>เพื่อนของคุณชำระเงินสำเร็จแล้ว! คุณได้รับ +X Stamp</td>
+        <td>อีเมล · แจ้งเตือน · In-app</td>
+        <td>เข้า Dashboard เพื่อดู Stamp ที่เพิ่มขึ้น</td>
+        <td class="mute">X = จำนวน Stamp ที่ได้รับตามแพ็กเกจ</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><b>ถึง Milestone</b><div class="mute">(Milestone Reached)</div></td>
+        <td>🎁 ยินดีด้วย! คุณปลดล็อกรางวัลแล้ว รับรางวัลของคุณได้เลย</td>
+        <td>แจ้งเตือน · In-app</td>
+        <td>เข้า Dashboard เพื่อ Claim รางวัล</td>
+        <td class="mute">ส่งเมื่อถึง Milestone 1 / 3 / 6 / 12</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><b>มอบรางวัลให้ผู้ถูกชวน</b><div class="mute">(Referred Reward Delivered)</div></td>
+        <td>คุณได้รับรางวัล 10 ชั่วโมง เล่นได้ทันที!</td>
+        <td>อีเมล · แจ้งเตือน · In-app</td>
+        <td>เข้าเกมหรือ Dashboard เพื่อเริ่มเล่น</td>
+        <td class="mute">ส่งให้ผู้ถูกชวน เมื่อชำระเงินสำเร็จ</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><b>มีการยกเลิก / ปรับปรุงสิทธิ์</b><div class="mute">(Reversal / Support Notice)</div></td>
+        <td>มีการเปลี่ยนแปลงสถานะการรับรางวัล โปรดตรวจสอบรายละเอียด</td>
+        <td>อีเมล · แจ้งเตือน · In-app</td>
+        <td>ตรวจสอบรายละเอียดหรือติดต่อฝ่าย Support</td>
+        <td class="mute">กรณีมีการยกเลิกสิทธิ์/ปรับจำนวน Stamp หรือเกิดปัญหาจากระบบ</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sectionhead"><span class="num">04</span><h2>Checklist — งานที่ต้องทำ</h2></div>
+  <div class="card checklist" id="checklist">
+    <div class="checkgroup">
+      <h3>Referred User — Acquisition Flow</h3>
+      <label class="checkitem"><input type="checkbox" data-id="c1"><span>Payment method restriction UI (ปิด TrueMoney/LINE Pay สำหรับผู้ใช้ referral)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c2"><span>Checkout referral code field (manual entry, cross-device fallback)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c3"><span>Referred reward confirmation (10hr playtime)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c4"><span>Non-refundable T&amp;C surface ก่อนชำระเงิน</span></label>
+    </div>
+    <div class="checkgroup">
+      <h3>Empty / Edge / Error States</h3>
+      <label class="checkitem"><input type="checkbox" data-id="c5"><span>Ineligible user (already paid / daypass excluded)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c6"><span>One-conversion-already-used state</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c7"><span>Maxed-out advocate (24 stamps / 2 cards full)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c8"><span>Campaign ended / redemption deadline passed</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c9"><span>Payment succeeded but entitlement pending</span></label>
+    </div>
+    <div class="checkgroup">
+      <h3>Suspended / Maintenance (เพิ่มจาก decision map)</h3>
+      <label class="checkitem"><input type="checkbox" data-id="c10"><span>Suspended/flagged account state (CS message)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c11"><span>Maintenance / kill-switch state</span></label>
+    </div>
+    <div class="checkgroup">
+      <h3>Notification Templates</h3>
+      <label class="checkitem"><input type="checkbox" data-id="c12"><span>Campaign announcement (verified/non-verified)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c13"><span>Friend payment success (+X stamps)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c14"><span>Milestone-met notification</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c15"><span>Referred reward delivered (10hr code)</span></label>
+      <label class="checkitem"><input type="checkbox" data-id="c16"><span>Reversal / support notice</span></label>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = 'bro_acquisition_checklist_v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+  document.querySelectorAll('#checklist input[type=checkbox]').forEach(function(cb){
+    var id = cb.dataset.id;
+    if (saved[id]) { cb.checked = true; cb.nextElementSibling.classList.add('done'); }
+    cb.addEventListener('change', function(){
+      saved[id] = cb.checked;
+      cb.nextElementSibling.classList.toggle('done', cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(saved));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

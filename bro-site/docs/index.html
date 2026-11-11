@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>bro.game Design System — Docs</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<style>
+:root{--g:rgb(118,186,0);--bg:rgb(10,10,10);--surf:rgb(18,19,22);--side:rgb(13,14,17);--line:rgb(44,48,58);--mut:#A1A1AA}
+html,body{height:100%}
+body{background:var(--bg);color:#fff;font-family:var(--font-latin);display:grid;grid-template-columns:280px minmax(0,1fr);grid-template-rows:56px minmax(0,1fr);height:100vh;overflow:hidden}
+a{color:var(--g)}a:hover{color:rgb(163,255,71)}
+.bar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--side)}
+.bar .l{display:flex;align-items:center;gap:12px;min-width:0}
+.bar img{height:22px;width:auto;display:block}
+.bar .tag{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:9999px;padding:4px 10px;white-space:nowrap}
+.bar .r{display:flex;gap:16px;font-size:14px;align-items:center}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:#fff;border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:16px}
+aside{background:var(--side);border-right:1px solid var(--line);overflow-y:auto;padding:16px 12px 40px}
+aside .grp{margin-top:20px}
+aside .grp>b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding:0 12px 8px;font-weight:600}
+aside a{display:block;padding:8px 12px;border-radius:8px;color:#d4d4d8;font-size:14px;line-height:20px}
+aside a:hover{background:rgb(30,32,38);color:#fff}
+aside a.on{background:rgba(118,186,0,.14);color:var(--g);font-weight:600}
+main{overflow-y:auto}
+.page{max-width:960px;margin:0 auto;padding:48px clamp(20px,4vw,48px) 96px}
+.hero{display:flex;align-items:center;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.hero .mark{width:120px;height:80px;border-radius:12px;border:1px solid var(--line);background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;flex:none}
+.hero .mark img{width:72%;height:auto}
+.hero .mark i{position:absolute;right:0;top:0;bottom:0;width:14px;background:linear-gradient(rgb(177,245,122),rgb(118,186,0))}
+.hero h1{margin:0;font-size:clamp(28px,4vw,40px);letter-spacing:-.02em}
+.hero p{margin:6px 0 0;color:var(--mut)}
+.md{font-size:15px;line-height:1.7;color:#d4d4d8}
+.md h1{font-size:28px;color:#fff;margin:0 0 16px;letter-spacing:-.01em}
+.md h2{font-size:21px;color:#fff;margin:40px 0 12px;padding-top:24px;border-top:1px solid var(--line)}
+.md h3{font-size:17px;color:#fff;margin:28px 0 8px}
+.md strong{color:#fff}
+.md code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:rgb(30,32,38);border:1px solid var(--line);border-radius:6px;padding:1px 6px;word-break:break-word}
+.md ul{padding-left:22px}.md li{margin:6px 0}
+.md em{color:#e4e4e7}
+.ch{margin-bottom:24px}
+.ch .crumb{font-size:13px;color:var(--g);letter-spacing:.06em;text-transform:uppercase}
+.ch h1{margin:6px 0 6px;font-size:32px;letter-spacing:-.02em}
+.ch p{margin:0;color:var(--mut);font-size:15px;line-height:1.6}
+.frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surf)}
+.frame iframe{display:block;width:100%;border:0;background:var(--bg)}
+.frame.screen{aspect-ratio:16/10;position:relative}
+.frame.screen iframe{position:absolute;inset:0 auto auto 0;width:1440px;height:900px;transform-origin:0 0}
+.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--mut)}
+.meta code{font-family:"IBM Plex Mono",monospace}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}
+.pager a{border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:#fff;display:flex;flex-direction:column;gap:2px}
+.pager a span{font-size:12px;color:var(--mut)}
+.pager a.n{text-align:right}
+.pager a:hover{border-color:var(--g);color:#fff}
+@media (max-width:860px){
+body{grid-template-columns:minmax(0,1fr)}
+.menu-btn{display:block}
+aside{position:fixed;top:56px;left:0;bottom:0;width:min(300px,85vw);z-index:20;transform:translateX(-100%);transition:transform .2s}
+body.open aside{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.5)}
+.bar .tag,.bar .r a.hide{display:none}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="l"><button class="menu-btn" type="button" aria-label="Menu" onclick="document.body.classList.toggle('open')">☰</button><img src="../assets/logo-white.png" alt="GeForce NOW by bro."><span class="tag">Design System</span></div><div class="r"><a class="hide" href="../portfolio/">Portfolio</a></div></header>
+<aside id="nav"></aside>
+<main id="main"><div class="page" id="page"></div></main>
+<script>
+const CARDS=[
+{g:"Brand",n:"Logo marks",s:"Real bitmap wordmarks — no vector logo in source",p:"guidelines/logo-marks.html",h:160},
+{g:"Brand",n:"Imagery",s:"Full-bleed photographic, no illustration",p:"guidelines/imagery.html",h:200},
+{g:"Brand",n:"Icon set",s:"~55 line glyphs, raw path data, currentColor",p:"assets/icons/icon-set.card.html",h:220},
+{g:"Brand",n:"Radius scale",s:"xs 4 → 3xl 32, full 9999",p:"guidelines/radius-scale.html",h:150},
+{g:"Brand",n:"Glow shadow system",s:"Signature neon glow, not drop shadow",p:"guidelines/shadow-glow.html",h:160},
+{g:"Colors",n:"Brand Green",s:"Primary brand color + interaction states",p:"guidelines/colors-brand.html",h:150},
+{g:"Colors",n:"Neutrals",s:"Dark-theme surface + grey scale",p:"guidelines/colors-neutral.html",h:150},
+{g:"Colors",n:"Brand Color Scales",s:"Radix Lime/Green (12-step) + Tailwind Lime/Green (11-step)",p:"guidelines/colors-scales.html",h:420,w:900},
+{g:"Colors",n:"Semantic status",s:"Info / success / warning / danger",p:"guidelines/colors-semantic.html",h:150},
+{g:"Type",n:"Thai UI type",s:"IBM Plex Sans Thai — primary product face",p:"guidelines/type-thai.html",h:200},
+{g:"Type",n:"Latin type",s:"Inter — English marketing + dashboard chrome",p:"guidelines/type-latin.html",h:180},
+{g:"Type",n:"Type scale",s:"fontsize tokens, 8 → 60px",p:"guidelines/type-scale.html",h:120},
+{g:"Spacing",n:"Spacing tokens",s:"sp-* scale (not grid-snapped)",p:"guidelines/spacing-scale.html",h:140},
+{g:"Spacing",n:"Spacing in use",s:"Button padding at each size",p:"guidelines/spacing-usage.html",h:140},
+{g:"Components",n:"Button",s:"Color × Style × Size × State (60 variants)",p:"components/buttons.card.html",h:260},
+{g:"Components",n:"Input",s:"10 states: default / focus / correct / incorrect / password / disabled",p:"components/inputs.card.html",h:260},
+{g:"Components",n:"Badge & Alert Banner",s:"Status: default / success / warning / danger / info",p:"components/badges-alerts.card.html",h:160},
+{g:"Components",n:"Choicebox Checkbox",s:"unchecked / checked / disabled",p:"components/choicebox-checkbox.card.html",h:160},
+{g:"Components",n:"Choicebox Radio",s:"unselected / selected / disabled — package & payment selectors",p:"components/choicebox-radio.card.html",h:160},
+{g:"Components",n:"Modal",s:"default / danger / single-button, desktop + mobile",p:"components/modal.card.html",h:300},
+{g:"Components",n:"Nav Menu & Site Menu",s:"Sidebar nav items + full sidebar variants",p:"components/nav.card.html",h:220},
+{g:"Components",n:"Social Button",s:"Facebook / X / Line / Discord — full + icon-only",p:"components/social-buttons.card.html",h:160},
+{g:"Components",n:"Stamp & User Account",s:"Referral reward stamp + account chip",p:"components/stamp-account.card.html",h:220},
+{g:"Screens",n:"Membership Dashboard",s:"Click-through member area with sidebar navigation",p:"ui_kits/dashboard/index.html",screen:1},
+{g:"Screens",n:"Referral & Rewards",s:"Invite link, share, stamp milestones",p:"ui_kits/referral/Referral-Standalone.html",screen:1},
+{g:"Screens",n:"Referred User Flow",s:"7-step journey, 9 edge states, notifications",p:"ui_kits/acquisition-flow/index.html",screen:1},
+{g:"Screens",n:"Server Maintenance",s:"System alert modal",p:"ui_kits/maintenance/index.html",screen:1}
+];
+const slug=s=>s.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+CARDS.forEach(c=>c.id=slug(c.n));
+const GROUPS=[...new Set(CARDS.map(c=>c.g))];
+const nav=document.getElementById('nav'),page=document.getElementById('page'),main=document.getElementById('main');
+nav.innerHTML='<a href="#readme" data-id="readme">Readme</a>'+GROUPS.map(g=>'<div class="grp"><b>'+g+'</b>'+CARDS.filter(c=>c.g===g).map(c=>'<a href="#'+c.id+'" data-id="'+c.id+'">'+c.n+'</a>').join('')+'</div>').join('');
+const esc=s=>s.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+let readmeHTML=null;
+async function readme(){
+if(readmeHTML===null){try{const r=await fetch('../readme.md');const t=await r.text();readmeHTML=window.marked?marked.parse(t):'<pre>'+esc(t)+'</pre>'}catch(e){readmeHTML='<p>Could not load readme.md</p>'}}
+return readmeHTML;
+}
+function fit(){document.querySelectorAll('.frame.screen').forEach(f=>{f.querySelector('iframe').style.transform='scale('+(f.clientWidth/1440)+')'})}
+async function route(){
+const id=(location.hash||'#readme').slice(1);
+nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.id===id));
+document.body.classList.remove('open');main.scrollTop=0;
+const i=CARDS.findIndex(c=>c.id===id);
+if(i<0){
+page.innerHTML='<div class="hero"><div class="mark"><img src="../assets/logo-white.png" alt=""><i></i></div><div><h1>bro.game Design System</h1><p>GeForce NOW by bro. · '+CARDS.length+' pages</p></div></div><div class="md">Loading…</div>';
+const h=await readme();if((location.hash||'#readme')==='#readme'||!CARDS.some(c=>'#'+c.id===location.hash))page.querySelector('.md').innerHTML=h;return;
+}
+const c=CARDS[i],prev=CARDS[i-1],next=CARDS[i+1];
+const frame=c.screen?'<div class="frame screen"><iframe src="../'+c.p+'" title="'+esc(c.n)+'"></iframe></div>':'<div class="frame" style="max-width:'+((c.w||700)+2)+'px"><iframe src="../'+c.p+'" style="height:'+c.h+'px" title="'+esc(c.n)+'"></iframe></div>';
+page.innerHTML='<div class="ch"><div class="crumb">'+c.g+'</div><h1>'+esc(c.n)+'</h1><p>'+esc(c.s)+'</p></div>'+frame+'<div class="meta"><code>'+c.p+'</code><a href="../'+c.p+'" target="_blank" rel="noopener">Open in new tab ↗</a></div><div class="pager">'+(prev?'<a href="#'+prev.id+'"><span>← Previous</span>'+esc(prev.n)+'</a>':'<a href="#readme"><span>← Previous</span>Readme</a>')+(next?'<a class="n" href="#'+next.id+'"><span>Next →</span>'+esc(next.n)+'</a>':'<span></span>')+'</div>';
+fit();
+}
+addEventListener('hashchange',route);addEventListener('resize',fit);route();
+</script>
+</body>
+</html>
