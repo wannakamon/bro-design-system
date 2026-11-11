@@ -4,6 +4,10 @@ export interface ModalProps {
   style?: React.CSSProperties;
   property1?: "danger" | "default" | "single button";
   devices?: "desktop" | "mobile";
+  /** Status icon above the title; defaults to "none". */
+  icon?: "none" | "success" | "warning" | "danger";
+  /** Inset content box between body and buttons. `true` shows the placeholder. */
+  inset?: boolean | React.ReactNode;
   /** Text content; defaults to "What is Lorem Ipsum?". */
   text1?: string;
   /** Text content; defaults to "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,". */
