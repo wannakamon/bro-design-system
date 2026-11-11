@@ -1,17 +1,21 @@
+<!-- @dsCard group="Components" viewport="900x520" name="Input" subtitle="Default / Focus / Success / Danger / Disable / Text Area" -->
 <link rel="stylesheet" href="../styles.css">
 <script src="../_ds_bundle.js"></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<div id="root" style="background:rgb(18,19,22);padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
+<div id="root" style="background:rgb(18,19,22);padding:28px;font-family:var(--font-sans);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px"></div>
 <script type="text/babel" data-presets="react">
 const { Input } = window.BroGameDesignSystem_84b2ac;
-ReactDOM.render(React.createElement(React.Fragment,null,
-  React.createElement(Input,{inputState:'default',text1:'อีเมล',text3:'กรอกอีเมล'}),
-  React.createElement(Input,{inputState:'focus',text1:'อีเมล',text3:'กรอกอีเมล'}),
-  React.createElement(Input,{inputState:'correct',text1:'อีเมล',text3:'name@bro.game'}),
-  React.createElement(Input,{inputState:'incorrect',text1:'อีเมล',text3:'name@bro'}),
-  React.createElement(Input,{inputState:'password',text1:'รหัสผ่าน'}),
-  React.createElement(Input,{inputState:'disabled',text1:'อีเมล'})
+const h=React.createElement;const T=({t})=>h('div',{style:{fontSize:20,fontWeight:500,color:'#fff',marginBottom:16}},t);const W={width:'100%'};
+const C=({t,children})=>h('div',null,h(T,{t}),children);
+const E='yourmail@example.com';
+ReactDOM.render(h(React.Fragment,null,
+  h(C,{t:'Default'},h(Input,{style:W,inputState:'default',text1:'Email',text3:E})),
+  h(C,{t:'Focus'},h(Input,{style:W,inputState:'focus',text1:'Email',text3:E})),
+  h(C,{t:'Success'},h(Input,{style:W,inputState:'correct',text1:'Email',text3:E,text4:'Confirm email'})),
+  h(C,{t:'Danger'},h(Input,{style:W,inputState:'incorrect',text1:'Email',text3:E,text4:'Something went wrong'})),
+  h(C,{t:'Disable'},h(Input,{style:W,inputState:'disabled',text1:'Label',text3:'Disable'})),
+  h(C,{t:'Text Area'},h(Input,{style:W,inputState:'text area',text1:'Message',text3:'About yourself'}))
 ), document.getElementById('root'));
 </script>

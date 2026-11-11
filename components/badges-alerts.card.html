@@ -1,15 +1,23 @@
+<!-- @dsCard group="Components" viewport="900x520" name="Badge & Alert Banner" subtitle="Badge status · Alert banner compact / with description + action" -->
 <link rel="stylesheet" href="../styles.css">
 <script src="../_ds_bundle.js"></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<div id="root" style="background:rgb(18,19,22);padding:16px"></div>
+<div id="root" style="background:rgb(18,19,22);padding:28px;font-family:var(--font-sans)"></div>
 <script type="text/babel" data-presets="react">
 const { Badge, AlertBanner } = window.BroGameDesignSystem_84b2ac;
-ReactDOM.render(React.createElement('div',null,
-  React.createElement('div',{style:{display:'flex',gap:10,marginBottom:16}},
-    ['default','success','warning','danger','info'].map(s=>React.createElement(Badge,{key:s,status:s,label:s}))
-  ),
-  React.createElement(AlertBanner,{alertStatus:'info',text1:'Information',text2:"Copy your link and share it with a friend today."})
+const h=React.createElement;
+const lab={fontSize:12,color:'rgb(140,140,140)',fontWeight:500,marginBottom:12};
+const S=[['info','Information'],['success','Success !'],['warning','Warning !'],['danger','Danger !']];
+const D="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,";
+const Col=({t,children})=>h('div',{style:{display:'flex',flexDirection:'column',gap:16,minWidth:0}},h('div',{style:lab},t),children);
+ReactDOM.render(h('div',null,
+  h('div',{style:lab},'Badge'),
+  h('div',{style:{display:'flex',flexWrap:'wrap',gap:10,marginBottom:32}},['default','success','warning','danger','info'].map(s=>h(Badge,{key:s,status:s,label:s}))),
+  h('div',{style:{display:'grid',gridTemplateColumns:'minmax(0,1fr) minmax(0,2fr)',gap:24,alignItems:'start'}},
+    h(Col,{t:'Alert banner · Compact'},...S.map(([s,t])=>h(AlertBanner,{key:s,alertStatus:s,text1:t,label:false,actionButton:false,style:{width:'100%'}}))),
+    h(Col,{t:'Alert banner · With description + action'},...S.map(([s,t])=>h(AlertBanner,{key:s,alertStatus:s,text1:t,text2:D,label:true,actionButton:true,style:{width:'100%'}})))
+  )
 ), document.getElementById('root'));
 </script>
