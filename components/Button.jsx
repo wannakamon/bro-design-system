@@ -6,7 +6,7 @@ const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "color=" + __venc(p.color) + '|' + "style2=" + __venc(p.style2) + '|' + "state=" + __venc(p.state) + '|' + "size=" + __venc(p.size);
 
 export function Button(_p = {}) {
-  const props = { ..._p, label: _p.label ?? "Button", color: _p.color ?? "primary", showIcon: _p.showIcon ?? true, style2: _p.style2 ?? "fill", loading: _p.loading ?? false, state: _p.state ?? "default", size: _p.size ?? "sm" };
+  const props = { ..._p, label: _p.label ?? "Button", color: _p.color ?? "primary", showIcon: _p.showIcon ?? false, style2: _p.style2 ?? "fill", loading: _p.loading ?? false, state: _p.state ?? "default", size: _p.size ?? "sm" };
   const __body0 = () => (
     <div className={props.className} style={{
       width: "fit-content",

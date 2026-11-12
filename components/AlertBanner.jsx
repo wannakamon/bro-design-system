@@ -44,6 +44,7 @@ export function AlertBanner(_p = {}) {
             position: "relative",
             width: 20,
             height: 20,
+            color: "var(--color-text-information)",
             flexShrink: 0,
           }}>{props.icon1 ?? <AlertInformationCircle style={{ transform: "scale(1.250, 1.250)", transformOrigin: "0 0" }} />}</div>
         <div style={{
@@ -127,6 +128,7 @@ export function AlertBanner(_p = {}) {
             position: "relative",
             width: 20,
             height: 20,
+            color: "var(--color-text-success)",
             flexShrink: 0,
           }}>{props.icon1 ?? <AlertCheckmarkCircle02 style={{ transform: "scale(1.250, 1.250)", transformOrigin: "0 0" }} />}</div>
         <div style={{
@@ -209,6 +211,7 @@ export function AlertBanner(_p = {}) {
             position: "relative",
             width: 20,
             height: 20,
+            color: "var(--color-text-warning)",
             flexShrink: 0,
           }}>{props.icon1 ?? <AlertAlert02 style={{ transform: "scale(1.250, 1.250)", transformOrigin: "0 0" }} />}</div>
         <div style={{
@@ -291,6 +294,7 @@ export function AlertBanner(_p = {}) {
             position: "relative",
             width: 20,
             height: 20,
+            color: "var(--color-text-danger)",
             flexShrink: 0,
           }}>{props.icon1 ?? <AlertOctagonAlert style={{ transform: "scale(1.250, 1.250)", transformOrigin: "0 0" }} />}</div>
         <div style={{
